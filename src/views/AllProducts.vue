@@ -73,6 +73,7 @@ export default {
     padding-bottom: 60px;
 
     .products-grid {
+      padding: 20px 40px;
       margin-top: 60px;
       margin-bottom: 30px;
       display: grid;
