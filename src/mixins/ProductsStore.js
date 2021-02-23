@@ -8,7 +8,7 @@ export const ProvidesProductsStore = {
   },
   async created() {
     const { data: products } = await ProductService.getProducts();
-    this.$set(this.productsStore, "products", products);
+    this.$set(this.productsStore, "products", products.slice(0, 50));
   },
   data() {
     return {

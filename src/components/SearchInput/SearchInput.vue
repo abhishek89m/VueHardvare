@@ -19,6 +19,11 @@ export default {
     onInputChanged(e) {
       clearTimeout(this.timeout);
 
+      if (e.target.value.length === 0) {
+        this.$emit('input', null);
+        return;
+      }
+
       if (e.target.value.length < 3) {
         return;
       }

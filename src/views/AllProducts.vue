@@ -9,7 +9,7 @@
         :key="product.id"
         :data="product" />
     </div>
-    <glow-button @click="showMoreProducts">Show more</glow-button>
+    <glow-button @click="showMoreProducts" v-show="isShowMoreVisible">Show more</glow-button>
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
       startIndex: 0,
       endIndex: 24,
       searchTerm: '',
+      isShowMoreVisible: true,
     };
   },
 
@@ -41,7 +42,7 @@ export default {
         return products.map((v) => v);
       }
 
-      return products.filter((product) => product.name.includes(this.searchTerm));
+      return products.filter(({ name }) => name.toLowerCase().includes(this.searchTerm.toLowerCase()));
     },
   },
 
@@ -53,6 +54,9 @@ export default {
     showMoreProducts()  {
       const { length: count } = this.filteredProducts;
       this.$set(this, 'endIndex', this.endIndex <= count ? (this.endIndex + 12) : count);
+
+      const { products: { length } } = this.productsStore;
+      this.isShowMoreVisible = this.endIndex < length
     },
   },
 
